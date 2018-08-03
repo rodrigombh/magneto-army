@@ -1,0 +1,6 @@
+template: MagnetoArmy
+
+logging:
+  level: INFO
+  loggers:
+    com.rmbh: DEBUG
