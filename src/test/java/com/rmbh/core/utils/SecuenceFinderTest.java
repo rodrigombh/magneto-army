@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class SecuenceFinderTest {
 
 	@Test
-	public void test1() {
+	public void countEqualConsecutiveCharacters_count3() {
 
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('A'));
@@ -24,7 +24,7 @@ class SecuenceFinderTest {
 	}
 
 	@Test
-	public void test2() {
+	public void countEqualConsecutiveCharacters_count2() {
 
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('A'));
@@ -37,7 +37,7 @@ class SecuenceFinderTest {
 	}
 
 	@Test
-	public void test3() {
+	public void countEqualConsecutiveCharacters_count1() {
 
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('A'));
@@ -49,7 +49,7 @@ class SecuenceFinderTest {
 	}
 
 	@Test
-	public void test4() {
+	public void countEqualConsecutiveCharacters_nothing() {
 
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('B'));
@@ -60,7 +60,7 @@ class SecuenceFinderTest {
 	}
 
 	@Test
-	public void test5() {
+	public void countEqualConsecutiveCharacters_count4() {
 
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('A'));
@@ -74,49 +74,49 @@ class SecuenceFinderTest {
 	}
 	
 	@Test
-	public void test6() {
+	public void countSecuences_count1() {
 		int counter = SecuenceFinder.countSecuences("AAAA");
 		assertEquals(1, counter);
 	}
 	
 	@Test
-	public void test7() {
+	public void countSecuences_nothing() {
 		int counter = SecuenceFinder.countSecuences("AAA");
 		assertEquals(0, counter);
 	}
 	
 	@Test
-	public void test8() {
+	public void countSecuences_rightSide_found1() {
 		int counter = SecuenceFinder.countSecuences("AABBBB");
 		assertEquals(1, counter);
 	}
 	
 	@Test
-	public void test9() {
+	public void countSecuences_rightSideBigger_found1() {
 		int counter = SecuenceFinder.countSecuences("AABBBBB");
 		assertEquals(1, counter);
 	}
 	
 	@Test
-	public void test10() {
+	public void countSecuences_middle_found1() {
 		int counter = SecuenceFinder.countSecuences("AABBBBAA");
 		assertEquals(1, counter);
 	}
 	
 	@Test
-	public void test11() {
+	public void countSecuences_consecutives_found2() {
 		int counter = SecuenceFinder.countSecuences("AAAAAAAA");
 		assertEquals(2, counter);
 	}
 	
 	@Test
-	public void test12() {
+	public void countSecuences_consecutivesMoreLetters_found2() {
 		int counter = SecuenceFinder.countSecuences("AAAAAAAAA");
 		assertEquals(2, counter);
 	}
 	
 	@Test
-	public void test13() {
+	public void countSecuences_onSide_found2() {
 		int counter = SecuenceFinder.countSecuences("AAAAABBAAAAAA");
 		assertEquals(2, counter);
 	}

@@ -1,5 +1,8 @@
 package com.rmbh;
 
+import com.rmbh.core.dna.DnaAnalyzer;
+import com.rmbh.core.dna.DnaAnalyzerImp;
+import com.rmbh.core.extractor.MatrixExtractorImp;
 import com.rmbh.health.ServerHealthCheck;
 import com.rmbh.resources.MagnetoArmyResource;
 
@@ -25,11 +28,13 @@ public class MagnetoArmyApplication extends Application<MagnetoArmyConfiguration
 
 	@Override
 	public void run(final MagnetoArmyConfiguration configuration, final Environment environment) {
+		
 		final ServerHealthCheck healthCheck = new ServerHealthCheck();
-		System.out.println(configuration.getTemplate());
-		final MagnetoArmyResource magnetoArmyResource = new MagnetoArmyResource();
+		final DnaAnalyzer dnaAnalyzer = new DnaAnalyzerImp();
+		
+		final MagnetoArmyResource magnetoArmyResource = new MagnetoArmyResource(dnaAnalyzer);
 		environment.jersey().register(magnetoArmyResource);
-		environment.jersey().register(healthCheck);
+		environment.healthChecks().register("simpleServerHealthCheck", healthCheck);
 	}
 
 }

@@ -25,7 +25,7 @@ public class SecuenceFinder {
 		int secuenceCounter = 0;
 		int index = 0;
 		
-		while(index < charListSize -1) {
+		while(index < charListSize - 1) {
 		
 			int equalConsecutiveCharactersCounter = countEqualConsecutiveCharacters(charList.subList(index, charListSize), charList.get(index));
 			

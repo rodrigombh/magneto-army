@@ -1,40 +1,37 @@
-package com.rmbh.core.utils;
+package com.rmbh.core.extractor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class MatrixExtractor {
+public class MatrixExtractorImp implements MatrixExtractor{
 	
 	private String[] stringArray;
-	private ArrayList<String> verticalLines = new ArrayList<String>();
-	private ArrayList<String> horizontalLines = new ArrayList<String>();
-	private ArrayList<String> diagonalLeftToRightLines = new ArrayList<String>();
-	private ArrayList<String> diagonalRightToLeftLines = new ArrayList<String>(); //TBD
+	private List<String> verticalLines = new ArrayList<String>();
+	private List<String> horizontalLines = new ArrayList<String>();
+	private List<String> diagonalLines = new ArrayList<String>();
 
-	public MatrixExtractor(String[] stringArray) {
+	public MatrixExtractorImp(String[] stringArray) {
 		this.stringArray = stringArray;
-		extractLines();
+		resolveVerticalLines();
+		resolveDiagonalLines();
+		resolveHorizonalLines();
 	}
 
-	private void extractLines() {
+	private void resolveHorizonalLines() {
+		horizontalLines = new ArrayList<>(Arrays.asList(stringArray));
+	}
+
+	private void resolveDiagonalLines() {
 		
-		int stringArrayLength = stringArray.length;
 		String stringRow = StringUtils.EMPTY;
 		String stringRowReversed = StringUtils.EMPTY;
+		int stringArrayLength = stringArray.length;
 		
-		// Resolve Vertical Lines
-		for (int col = 0; col < stringArrayLength; col++) {
-			stringRow = StringUtils.EMPTY;
-			for (int fil = 0; fil < stringArrayLength; fil++) {
-				stringRow = stringRow.concat(getStringElem(fil, col));
-			}
-			verticalLines.add(stringRow);
-		}
-		
-		// Resolve Diagonal Lines (1st Triangle)
-		
+		// Resolve 1st Triangle
 		for (int fil = 0; fil < stringArrayLength; fil++) {
 			stringRow = StringUtils.EMPTY;
 			stringRowReversed = StringUtils.EMPTY;
@@ -42,11 +39,11 @@ public class MatrixExtractor {
 				stringRow = stringRow.concat(getStringElem(fil - col, col));
 				stringRowReversed = stringRowReversed.concat(getStringElemReversed(fil - col, col));
 			}
-			diagonalLeftToRightLines.add(stringRow);
-			diagonalRightToLeftLines.add(stringRowReversed);
+			diagonalLines.add(stringRow);
+			diagonalLines.add(stringRowReversed);
 		}
 		
-		// Resolve Diagonal Lines (2do Triangle)
+		// Resolve 2do Triangle
 		for (int col = 0; col < stringArrayLength - 1; col++) {
 			stringRow = StringUtils.EMPTY;
 			stringRowReversed = StringUtils.EMPTY;
@@ -54,13 +51,24 @@ public class MatrixExtractor {
 				stringRow = stringRow.concat(getStringElem(fil, col + (stringArrayLength - fil)));
 				stringRowReversed = stringRowReversed.concat(getStringElemReversed(fil, col + (stringArrayLength - fil)));
 			}
-			diagonalLeftToRightLines.add(stringRow);
-			diagonalRightToLeftLines.add(stringRowReversed);
+			diagonalLines.add(stringRow);
+			diagonalLines.add(stringRowReversed);
 		}
 		
-		// Resolve Horizonal  Lines
-		horizontalLines = new ArrayList<>(Arrays.asList(stringArray));
+	}
+
+	private void resolveVerticalLines() {
 		
+		String stringRow = StringUtils.EMPTY;
+		int stringArrayLength = stringArray.length;
+		
+		for (int col = 0; col < stringArrayLength; col++) {
+			stringRow = StringUtils.EMPTY;
+			for (int fil = 0; fil < stringArrayLength; fil++) {
+				stringRow = stringRow.concat(getStringElem(fil, col));
+			}
+			verticalLines.add(stringRow);
+		}
 	}
 	
 	private String getStringElem(int fil, int col) {
@@ -77,20 +85,19 @@ public class MatrixExtractor {
 		return stringArray;
 	}
 
-	public ArrayList<String> getVerticalLines() {
+	@Override
+	public List<String> getVerticalLines() {
 		return verticalLines;
 	}
 
-	public ArrayList<String> getHorizontalLines() {
+	@Override
+	public List<String> getHorizontalLines() {
 		return horizontalLines;
 	}
-
-	public ArrayList<String> getDiagonalLeftToRightLines() {
-		return diagonalLeftToRightLines;
-	}
-
-	public ArrayList<String> getDiagonalRightToLeftLines() {
-		return diagonalRightToLeftLines;
+	
+	@Override
+	public List<String> getDiagonalLines() {
+		return diagonalLines;
 	}
 	
 }

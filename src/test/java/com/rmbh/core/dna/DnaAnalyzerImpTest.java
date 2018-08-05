@@ -5,17 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DnaAnalyzerSimpleImpTest {
+class DnaAnalyzerImpTest {
 
 	DnaAnalyzer dnaAnalyzer;
 	
 	@BeforeEach
 	public void setup() {
-		dnaAnalyzer = new DnaAnalyzerSimpleImp();
+		dnaAnalyzer = new DnaAnalyzerImp();
 	}
 	
 	@Test
-	void test() {
+	void test_exampleGiven_true() {
 		
 		String[] dna = {
 				"ATGCGA",
@@ -32,7 +32,7 @@ class DnaAnalyzerSimpleImpTest {
 	}
 	
 	@Test
-	void test2() {
+	void test_exampleGiven_false() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -49,7 +49,7 @@ class DnaAnalyzerSimpleImpTest {
 	}
 	
 	@Test
-	void test3() {
+	void test_diagonaEdgelLeftToRightAndHorizontalBottom_true() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -66,7 +66,41 @@ class DnaAnalyzerSimpleImpTest {
 	}
 	
 	@Test
-	void test4() {
+	void test_gerenic1_true() {
+		
+		String[] dna = {
+				"ATGCGA", 
+				"CAGTGA", 
+				"TTATTA", 
+				"AGACGA", 
+				"GCGTCA", 
+				"TTTTTG"
+		};
+		
+		boolean isMutant = dnaAnalyzer.isMutant(dna);
+		
+		assertTrue(isMutant);
+	}
+	
+	@Test
+	void test_gerenic2_true() {
+		
+		String[] dna = {
+				"ATGCGA", 
+				"AAGTGC", 
+				"ATATTT", 
+				"ATACGG", 
+				"GTGTCA", 
+				"TTACTG"
+		};
+		
+		boolean isMutant = dnaAnalyzer.isMutant(dna);
+		
+		assertTrue(isMutant);
+	}
+	
+	@Test
+	void test_bigger_false() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -86,7 +120,7 @@ class DnaAnalyzerSimpleImpTest {
 	}
 	
 	@Test
-	void test5() {
+	void test_twoConsecutivesSecOfSameLetter_true() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -106,7 +140,7 @@ class DnaAnalyzerSimpleImpTest {
 	}
 	
 	@Test
-	void test6() {
+	void test_diagonalLeftToRightAndVerticalOnSide_true() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -126,7 +160,7 @@ class DnaAnalyzerSimpleImpTest {
 	}
 	
 	@Test
-	void test7() {
+	void test_bigger_true() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -138,40 +172,6 @@ class DnaAnalyzerSimpleImpTest {
 				"GCGTCAATA",
 				"CAGTGAAGT",
 				"GCGTCATTA"
-		};
-		
-		boolean isMutant = dnaAnalyzer.isMutant(dna);
-		
-		assertTrue(isMutant);
-	}
-	
-	@Test
-	void test8() {
-		
-		String[] dna = {
-				"ATGCGA", 
-				"CAGTGA", 
-				"TTATTA", 
-				"AGACGA", 
-				"GCGTCA", 
-				"TTTTTG"
-		};
-		
-		boolean isMutant = dnaAnalyzer.isMutant(dna);
-		
-		assertTrue(isMutant);
-	}
-	
-	@Test
-	void test9() {
-		
-		String[] dna = {
-				"ATGCGA", 
-				"AAGTGC", 
-				"ATATTT", 
-				"ATACGG", 
-				"GTGTCA", 
-				"TTACTG"
 		};
 		
 		boolean isMutant = dnaAnalyzer.isMutant(dna);

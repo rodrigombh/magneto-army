@@ -10,7 +10,19 @@ import org.junit.jupiter.api.Test;
 class ListUtilsTest {
 
 	@Test
-	public void test() {
+	public void getHead() {
+		List<Character> list = new ArrayList<Character>();
+		list.add(new Character('A'));
+		list.add(new Character('B'));
+		list.add(new Character('C'));
+
+		Character head = ListUtils.getHead(list);
+
+		assertEquals(new Character('A'), head);
+	}
+	
+	@Test
+	public void getTail() {
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('A'));
 		list.add(new Character('B'));
@@ -24,7 +36,7 @@ class ListUtilsTest {
 	}
 
 	@Test
-	public void test2() {
+	public void getTail_oneElem_noElems() {
 		List<Character> list = new ArrayList<Character>();
 		list.add(new Character('A'));
 

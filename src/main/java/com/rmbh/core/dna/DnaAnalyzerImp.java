@@ -1,16 +1,25 @@
 package com.rmbh.core.dna;
 
-import com.rmbh.core.utils.MatrixExtractor;
+import java.util.Arrays;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.rmbh.core.extractor.MatrixExtractor;
+import com.rmbh.core.extractor.MatrixExtractorImp;
 import com.rmbh.core.utils.SecuenceFinder;
 
-public class DnaAnalyzerSimpleImp implements DnaAnalyzer {
+public class DnaAnalyzerImp implements DnaAnalyzer {
+	
+	Logger logger = LoggerFactory.getLogger(DnaAnalyzerImp.class);
 
 	@Override
 	public boolean isMutant(String[] dna) {
 
+		logger.info("Going to validate: " + Arrays.toString(dna));
+		
+		MatrixExtractor matrixExtractor = new MatrixExtractorImp(dna);
 		int secuenceCounter = 0;
-
-		MatrixExtractor matrixExtractor = new MatrixExtractor(dna);
 
 		for (String line : matrixExtractor.getHorizontalLines()) {
 			secuenceCounter = secuenceCounter + SecuenceFinder.countSecuences(line);
@@ -20,16 +29,11 @@ public class DnaAnalyzerSimpleImp implements DnaAnalyzer {
 			secuenceCounter = secuenceCounter + SecuenceFinder.countSecuences(line);
 		}
 
-		for (String line : matrixExtractor.getDiagonalLeftToRightLines()) {
+		for (String line : matrixExtractor.getDiagonalLines()) {
 			secuenceCounter = secuenceCounter + SecuenceFinder.countSecuences(line);
 		}
 		
-		for (String line : matrixExtractor.getDiagonalRightToLeftLines()) {
-			secuenceCounter = secuenceCounter + SecuenceFinder.countSecuences(line);
-		}
-		
-		//TODO: Loguea cuantas encontraste
-		System.out.println("secuenceCounter: " + secuenceCounter);
+		logger.info("Secuences Found: " + secuenceCounter);
 
 		return secuenceCounter > 1;
 	}
