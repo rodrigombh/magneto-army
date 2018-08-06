@@ -1,13 +1,13 @@
 package com.rmbh.core.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class SecuenceFinderTest {
+import static org.junit.Assert.assertEquals;
+
+public class SecuenceFinderTest {
 
 	@Test
 	public void countEqualConsecutiveCharacters_count3() {

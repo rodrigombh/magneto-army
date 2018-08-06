@@ -1,13 +1,14 @@
 package com.rmbh.core.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class DnaRequestValidatorTest {
+public class DnaRequestValidatorTest {
 
 	@Test
-	void isValid_true() {
+	public void isValid_true() {
 		
 		String[] dna = {
 				"ATGCGA",
@@ -22,7 +23,7 @@ class DnaRequestValidatorTest {
 	}
 	
 	@Test
-	void isValid_invalidLetter_false() {
+	public void isValid_invalidLetter_false() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -37,7 +38,7 @@ class DnaRequestValidatorTest {
 	}
 	
 	@Test
-	void isValid_invalidSize_false() {
+	public void isValid_invalidSize_false() {
 		
 		String[] dna = {
 				"ATGCGA",
@@ -52,7 +53,7 @@ class DnaRequestValidatorTest {
 	}
 	
 	@Test
-	void isValid_both_false() {
+	public void isValid_both_false() {
 		
 		String[] dna = {
 				"ATGCGA",

@@ -1,21 +1,22 @@
 package com.rmbh.core.dna;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class DnaAnalyzerImpTest {
+public class DnaAnalyzerImpTest {
 
 	DnaAnalyzer dnaAnalyzer;
 	
-	@BeforeEach
+	@Before
 	public void setup() {
 		dnaAnalyzer = new DnaAnalyzerImp();
 	}
 	
 	@Test
-	void test_exampleGiven_true() {
+	public void test_exampleGiven_true() {
 		
 		String[] dna = {
 				"ATGCGA",
@@ -32,7 +33,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_exampleGiven_false() {
+	public void test_exampleGiven_false() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -49,7 +50,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_diagonaEdgelLeftToRightAndHorizontalBottom_true() {
+	public void test_diagonaEdgelLeftToRightAndHorizontalBottom_true() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -66,7 +67,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_gerenic1_true() {
+	public void test_gerenic1_true() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -83,7 +84,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_gerenic2_true() {
+	public void test_gerenic2_true() {
 		
 		String[] dna = {
 				"ATGCGA", 
@@ -100,7 +101,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_bigger_false() {
+	public void test_bigger_false() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -120,7 +121,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_twoConsecutivesSecOfSameLetter_true() {
+	public void test_twoConsecutivesSecOfSameLetter_true() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -140,7 +141,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_diagonalLeftToRightAndVerticalOnSide_true() {
+	public void test_diagonalLeftToRightAndVerticalOnSide_true() {
 		
 		String[] dna = {
 				"ATGCGACGT", 
@@ -160,7 +161,7 @@ class DnaAnalyzerImpTest {
 	}
 	
 	@Test
-	void test_bigger_true() {
+	public void test_bigger_true() {
 		
 		String[] dna = {
 				"ATGCGACGT", 

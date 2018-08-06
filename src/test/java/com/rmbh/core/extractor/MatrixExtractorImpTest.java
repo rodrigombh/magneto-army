@@ -1,12 +1,13 @@
 package com.rmbh.core.extractor;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class MatrixExtractorImpTest {
+public class MatrixExtractorImpTest {
 
 	@Test
 	public void test() {
