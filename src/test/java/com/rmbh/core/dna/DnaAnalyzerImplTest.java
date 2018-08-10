@@ -6,13 +6,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DnaAnalyzerImpTest {
+import com.rmbh.core.analyzer.DnaAnalyzer;
+import com.rmbh.core.analyzer.DnaAnalyzerImpl;
+
+public class DnaAnalyzerImplTest {
 
 	DnaAnalyzer dnaAnalyzer;
 	
 	@Before
 	public void setup() {
-		dnaAnalyzer = new DnaAnalyzerImp();
+		dnaAnalyzer = new DnaAnalyzerImpl();
 	}
 	
 	@Test

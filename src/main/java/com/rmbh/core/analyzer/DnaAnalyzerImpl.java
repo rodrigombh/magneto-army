@@ -1,24 +1,20 @@
-package com.rmbh.core.dna;
-
-import java.util.Arrays;
+package com.rmbh.core.analyzer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.rmbh.core.extractor.MatrixExtractor;
-import com.rmbh.core.extractor.MatrixExtractorImp;
+import com.rmbh.core.extractor.MatrixExtractorImpl;
 import com.rmbh.core.utils.SecuenceFinder;
 
-public class DnaAnalyzerImp implements DnaAnalyzer {
+public class DnaAnalyzerImpl implements DnaAnalyzer {
 	
-	Logger logger = LoggerFactory.getLogger(DnaAnalyzerImp.class);
+	Logger logger = LoggerFactory.getLogger(DnaAnalyzerImpl.class);
 
 	@Override
 	public boolean isMutant(String[] dna) {
-
-		logger.info("Going to validate: " + Arrays.toString(dna));
 		
-		MatrixExtractor matrixExtractor = new MatrixExtractorImp(dna);
+		MatrixExtractor matrixExtractor = new MatrixExtractorImpl(dna);
 		int secuenceCounter = 0;
 
 		for (String line : matrixExtractor.getHorizontalLines()) {

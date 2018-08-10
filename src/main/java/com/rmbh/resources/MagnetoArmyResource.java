@@ -11,17 +11,17 @@ import javax.ws.rs.core.Response.Status;
 
 import com.codahale.metrics.annotation.Timed;
 import com.rmbh.api.DnaRequest;
-import com.rmbh.core.dna.DnaAnalyzer;
+import com.rmbh.core.mutant.MutantService;
 import com.rmbh.core.utils.DnaRequestValidator;
 
 @Path("/magneto-army")
 @Produces(MediaType.APPLICATION_JSON)
 public class MagnetoArmyResource {
 	
-	private final DnaAnalyzer dnaAnalyzer;
+	private final MutantService mutantService;
 	 
-	public MagnetoArmyResource(DnaAnalyzer dnaAnalyzer) {
-		this.dnaAnalyzer = dnaAnalyzer;
+	public MagnetoArmyResource(MutantService mutantService) {
+		this.mutantService = mutantService;
 	}
 
 	@GET
@@ -35,9 +35,8 @@ public class MagnetoArmyResource {
 	@Timed
 	@Path("/mutant")
 	public Response mutant(@NotNull DnaRequest dna) {
-		
 		if (DnaRequestValidator.isValid(dna.getDna())) {
-			if (dnaAnalyzer.isMutant(dna.getDna())) {
+			if (mutantService.isMutant(dna.getDna())) {
 				return Response.status(Status.OK).build();
 			} else {
 				return Response.status(Status.FORBIDDEN).build();
@@ -45,7 +44,6 @@ public class MagnetoArmyResource {
 		} else {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		
 	}
 	
 }

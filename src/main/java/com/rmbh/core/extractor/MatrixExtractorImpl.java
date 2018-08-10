@@ -7,14 +7,14 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class MatrixExtractorImp implements MatrixExtractor{
+public class MatrixExtractorImpl implements MatrixExtractor{
 	
 	private String[] stringArray;
 	private List<String> verticalLines = new ArrayList<String>();
 	private List<String> horizontalLines = new ArrayList<String>();
 	private List<String> diagonalLines = new ArrayList<String>();
 
-	public MatrixExtractorImp(String[] stringArray) {
+	public MatrixExtractorImpl(String[] stringArray) {
 		this.stringArray = stringArray;
 		resolveVerticalLines();
 		resolveDiagonalLines();

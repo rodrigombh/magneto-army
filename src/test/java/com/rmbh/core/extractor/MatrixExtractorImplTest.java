@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class MatrixExtractorImpTest {
+public class MatrixExtractorImplTest {
 
 	@Test
 	public void test() {
@@ -22,7 +22,7 @@ public class MatrixExtractorImpTest {
 				"QRSTUVW"
 		};
 		
-		MatrixExtractorImp matrixExtractor = new MatrixExtractorImp(stringArray);
+		MatrixExtractorImpl matrixExtractor = new MatrixExtractorImpl(stringArray);
 		
 		List<String> horizontalLines = matrixExtractor.getHorizontalLines();
 		List<String> verticalLines = matrixExtractor.getVerticalLines();

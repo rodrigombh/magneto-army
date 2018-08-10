@@ -1,5 +1,9 @@
 template: MagnetoArmy
 
+accessKey:
+
+secretKey:
+
 logging:
   level: INFO
   loggers:
