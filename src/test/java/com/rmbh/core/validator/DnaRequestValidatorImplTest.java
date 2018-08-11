@@ -1,11 +1,18 @@
-package com.rmbh.core.utils;
+package com.rmbh.core.validator;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class DnaRequestValidatorTest {
+public class DnaRequestValidatorImplTest {
+	
+	DnaRequestValidator dnaRequestValidator;
+	
+	@Before
+	public void setup() {
+		dnaRequestValidator = new DnaRequestValidatorImpl();
+	} 
 
 	@Test
 	public void isValid_true() {
@@ -19,7 +26,7 @@ public class DnaRequestValidatorTest {
 				"TCACTG"
 		};
 		
-		assertTrue(DnaRequestValidator.isValid(dna));
+		assertTrue(dnaRequestValidator.isValid(dna));
 	}
 	
 	@Test
@@ -34,7 +41,7 @@ public class DnaRequestValidatorTest {
 				"TCACTG"
 		};
 		
-		assertFalse(DnaRequestValidator.isValid(dna));
+		assertFalse(dnaRequestValidator.isValid(dna));
 	}
 	
 	@Test
@@ -49,7 +56,7 @@ public class DnaRequestValidatorTest {
 				"TCACT"
 		};
 		
-		assertFalse(DnaRequestValidator.isValid(dna));
+		assertFalse(dnaRequestValidator.isValid(dna));
 	}
 	
 	@Test
@@ -64,7 +71,7 @@ public class DnaRequestValidatorTest {
 				"TCACT"
 		};
 		
-		assertFalse(DnaRequestValidator.isValid(dna));
+		assertFalse(dnaRequestValidator.isValid(dna));
 	}
-	
 }
+	

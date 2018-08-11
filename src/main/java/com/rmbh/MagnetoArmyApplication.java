@@ -8,11 +8,13 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.rmbh.core.analyzer.DnaAnalyzer;
 import com.rmbh.core.analyzer.DnaAnalyzerImpl;
-import com.rmbh.core.mutant.MutantService;
-import com.rmbh.core.mutant.MutantServiceImpl;
+import com.rmbh.core.mutant.MutantServiceOrchestrator;
+import com.rmbh.core.mutant.MutantServiceOrchestratorImpl;
+import com.rmbh.core.validator.DnaRequestValidator;
+import com.rmbh.core.validator.DnaRequestValidatorImpl;
+import com.rmbh.dao.DnaItemDAO;
+import com.rmbh.dao.DnaItemDaoImpl;
 import com.rmbh.health.ServerHealthCheck;
-import com.rmbh.models.dao.DnaItemDAO;
-import com.rmbh.models.dao.DnaItemDaoImpl;
 import com.rmbh.resources.MagnetoArmyResource;
 
 import io.dropwizard.Application;
@@ -37,17 +39,18 @@ public class MagnetoArmyApplication extends Application<MagnetoArmyConfiguration
 	public void run(final MagnetoArmyConfiguration configuration, final Environment environment) {
 		
 		BasicAWSCredentials awsCreds = new BasicAWSCredentials(configuration.getAccessKey(), configuration.getSecretKey());
-		AmazonDynamoDBClientBuilder builder = AmazonDynamoDBClientBuilder.standard()
+		AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
 				.withCredentials(new AWSStaticCredentialsProvider(awsCreds))
-				.withRegion(Regions.US_EAST_2);
-		AmazonDynamoDB client = builder.build();
+				.withRegion(Regions.US_EAST_2)
+				.build();
 		DynamoDBMapper dynamoDBMapper = new DynamoDBMapper(client);
 		
 		final DnaItemDAO dnaItemDao = new DnaItemDaoImpl(dynamoDBMapper);
 		final DnaAnalyzer dnaAnalyzer = new DnaAnalyzerImpl();
-		final MutantService mutantService = new MutantServiceImpl(dnaAnalyzer, dnaItemDao);
+		final MutantServiceOrchestrator mutantService = new MutantServiceOrchestratorImpl(dnaAnalyzer, dnaItemDao);
+		final DnaRequestValidator dnaRequestValidator = new DnaRequestValidatorImpl();
 		
-		final MagnetoArmyResource magnetoArmyResource = new MagnetoArmyResource(mutantService);
+		final MagnetoArmyResource magnetoArmyResource = new MagnetoArmyResource(mutantService, dnaRequestValidator);
 		environment.jersey().register(magnetoArmyResource);
 		
 		final ServerHealthCheck healthCheck = new ServerHealthCheck();

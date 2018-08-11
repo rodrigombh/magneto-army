@@ -11,39 +11,43 @@ import javax.ws.rs.core.Response.Status;
 
 import com.codahale.metrics.annotation.Timed;
 import com.rmbh.api.DnaRequest;
-import com.rmbh.core.mutant.MutantService;
-import com.rmbh.core.utils.DnaRequestValidator;
+import com.rmbh.api.StatsResponse;
+import com.rmbh.core.mutant.MutantServiceOrchestrator;
+import com.rmbh.core.validator.DnaRequestValidator;
+import com.rmbh.core.validator.DnaRequestValidatorImpl;
 
 @Path("/magneto-army")
 @Produces(MediaType.APPLICATION_JSON)
 public class MagnetoArmyResource {
 	
-	private final MutantService mutantService;
+	private final MutantServiceOrchestrator mutantService;
+	private final DnaRequestValidator dnaRequestValidator;
 	 
-	public MagnetoArmyResource(MutantService mutantService) {
+	public MagnetoArmyResource(MutantServiceOrchestrator mutantService, DnaRequestValidator dnaRequestValidator) {
 		this.mutantService = mutantService;
+		this.dnaRequestValidator = dnaRequestValidator;
 	}
 
 	@GET
 	@Timed
 	@Path("/stats")
-	public String stats() {
-		return "TBD";
+	public StatsResponse stats() {
+		return mutantService.getStatistics();
 	}
 	
 	@POST
 	@Timed
 	@Path("/mutant")
 	public Response mutant(@NotNull DnaRequest dna) {
-		if (DnaRequestValidator.isValid(dna.getDna())) {
-			if (mutantService.isMutant(dna.getDna())) {
-				return Response.status(Status.OK).build();
-			} else {
-				return Response.status(Status.FORBIDDEN).build();
-			}
-		} else {
-			return Response.status(Status.BAD_REQUEST).build();
+		
+		Status status = Status.BAD_REQUEST;
+		
+		if (dnaRequestValidator.isValid(dna.getDna())) {
+			
+			status = mutantService.isMutant(dna.getDna()) ? Status.OK : Status.FORBIDDEN;
 		}
+		
+		return Response.status(status).build();
 	}
 	
 }

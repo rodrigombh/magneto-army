@@ -1,6 +1,8 @@
 package com.rmbh.models;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
@@ -15,9 +17,13 @@ public class DnaItem {
 	
 	public DnaItem() {}
 	
-	public DnaItem(String id, List<String> sequence, Boolean isMutant) {
+	public static String generateId(String[] dna) {
+		return UUID.nameUUIDFromBytes(Arrays.toString(dna).getBytes()).toString();
+	}
+	
+	public DnaItem(String id, String[] sequence, Boolean isMutant) {
 		this.id = id;
-		this.sequence = sequence;
+		this.sequence = Arrays.asList(sequence);
 		this.isMutant = isMutant;
 	}
 

@@ -1,6 +1,7 @@
-package com.rmbh.models.dao;
+package com.rmbh.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
@@ -27,17 +28,12 @@ public class DnaItemDaoImpl implements DnaItemDAO {
 	}
 
 	@Override
-	public Integer getTotalDnaCount() {
-		return mapper.count(DnaItem.class, new DynamoDBScanExpression());
-	}
-
-	@Override
-	public Integer getMutantsDnaCount() {
+	public Integer getDnaCount(boolean isMutant) {
 
 		Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
-    eav.put(":val1", new AttributeValue().withBOOL(true));
+		eav.put(":val1", new AttributeValue().withN(isMutant ? "1" : "0"));
     
-		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+    DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
 				.withFilterExpression("isMutant = :val1")
 				.withExpressionAttributeValues(eav);
 		

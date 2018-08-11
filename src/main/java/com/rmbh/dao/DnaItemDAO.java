@@ -1,4 +1,4 @@
-package com.rmbh.models.dao;
+package com.rmbh.dao;
 
 import com.rmbh.models.DnaItem;
 
@@ -8,8 +8,6 @@ public interface DnaItemDAO {
 	
 	DnaItem get(String id);
 	
-	Integer getTotalDnaCount();
-	
-	Integer getMutantsDnaCount();
+	Integer getDnaCount(boolean isMutant);
 	
 }
