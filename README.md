@@ -11,3 +11,24 @@ Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+Stack
+---
+
+- Java
+- Dropwizard (Principales: Jetty, Jersey, JUnit, Mockito)
+- DynamoDB
+
+Hosting:
+---
+
+- AWS
+
+
+API
+---
+
+GET 	/magneto-army/stats
+
+POST 	/magneto-army/mutant
+Example: {"dna":["ATG","CAG","TTA"]}

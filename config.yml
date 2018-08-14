@@ -1,0 +1,10 @@
+template: MagnetoArmy
+
+accessKey: xxx
+
+secretKey: xxx
+
+logging:
+  level: INFO
+  loggers:
+    com.rmbh: DEBUG

@@ -1,0 +1,25 @@
+template: MagnetoArmy
+
+accessKey: xxx
+
+secretKey: xxx
+
+logging:
+
+  level: INFO
+
+  appenders:
+    - type: file
+      currentLogFilename: ./logs/app.log
+      archivedLogFilenamePattern: ./logs/app-%d.log.gz
+      archivedFileCount: 1
+      timeZone: UTC
+
+server:
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: ./logs/request.log
+        archivedLogFilenamePattern: ./logs/request-%d.log.gz
+        archivedFileCount: 1
+        timeZone: UTC
