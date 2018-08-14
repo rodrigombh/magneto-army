@@ -31,4 +31,5 @@ API
 GET 	/magneto-army/stats
 
 POST 	/magneto-army/mutant
-Example: {"dna":["ATG","CAG","TTA"]}
+
+{"dna":["ATG","CAG","TTA"]}
